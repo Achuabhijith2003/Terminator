@@ -3,6 +3,8 @@ from reminders.reminder_manager import ReminderManager
 from listening.listener import Listener
 from speaking.speaker import Speaker
 from real_time_data.data_retriever import DataRetriever
+from ai.ai_integration import AIIntegration
+from utils import config
 
 def main():
     # Initialize components
@@ -11,6 +13,7 @@ def main():
     listener = Listener()
     speaker = Speaker()
     data_retriever = DataRetriever()
+    ai_agent = AIIntegration(config.OPENAI_API_KEY)
 
     # Main loop
     while True:
@@ -21,19 +24,23 @@ def main():
         if not isinstance(command, str) or not command.strip():
             continue  # Ignore empty or invalid commands
         
-        print("Command:", type(command), command)
+        print(f"Command: {command}")
         
         # Check if the command contains the word "terminator"
         if "terminator" in command.lower():
             speaker.speak("I am the Terminator. How can I assist you?")
+            
         
         # Optional: Add an exit command
-        if "exit" in command.lower() or "stop" in command.lower():
+        elif "exit" in command.lower() or "stop" in command.lower():
             speaker.speak("Shutting down. Goodbye!")
             break  # Exit the loop and end the program
         else:
             # Process the command
-            speaker.speak("I am sorry, I cannot help you with that.")
+            result = ai_agent.generate_response(command)
+            print("REspose: ", result)
+            speaker.speak(result)
+            
 
 if __name__ == "__main__":
     main()

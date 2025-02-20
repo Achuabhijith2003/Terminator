@@ -1,7 +1,9 @@
 # Configuration settings for the Terminator AI Agent
+import os
+from dotenv import load_dotenv, dotenv_values 
 
 # OpenAI API key
-OPENAI_API_KEY = "your_openai_api_key_here"
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # LangChain settings
 LANGCHAIN_API_KEY = "your_langchain_api_key_here"
