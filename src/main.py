@@ -14,9 +14,26 @@ def main():
 
     # Main loop
     while True:
-        # Here you would implement the logic for the AI agent
-        # For example, listening for commands, retrieving data, etc.
-        pass
+        # Listen for commands
+        command = listener.start_listening()
+        
+        # Ensure command is a valid string
+        if not isinstance(command, str) or not command.strip():
+            continue  # Ignore empty or invalid commands
+        
+        print("Command:", type(command), command)
+        
+        # Check if the command contains the word "terminator"
+        if "terminator" in command.lower():
+            speaker.speak("I am the Terminator. How can I assist you?")
+        
+        # Optional: Add an exit command
+        if "exit" in command.lower() or "stop" in command.lower():
+            speaker.speak("Shutting down. Goodbye!")
+            break  # Exit the loop and end the program
+        else:
+            # Process the command
+            speaker.speak("I am sorry, I cannot help you with that.")
 
 if __name__ == "__main__":
     main()
