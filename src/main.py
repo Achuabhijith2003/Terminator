@@ -13,7 +13,7 @@ def main():
     listener = Listener()
     speaker = Speaker()
     data_retriever = DataRetriever()
-    ai_agent = AIIntegration(config.OPENAI_API_KEY)
+    ai_agent = AIIntegration()
 
     # Main loop
     while True:
@@ -37,7 +37,7 @@ def main():
             break  # Exit the loop and end the program
         else:
             # Process the command
-            result = ai_agent.generate_response(command)
+            result = ai_agent.generate_response_by_langchain(command)
             print("REspose: ", result)
             speaker.speak(result)
             
