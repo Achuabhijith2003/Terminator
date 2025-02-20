@@ -1,0 +1,8 @@
+OpenAI
+LangChain
+speechrecognition
+gTTS
+pyaudio
+requests
+python-dotenv
+RaspberryPi.GPIO
